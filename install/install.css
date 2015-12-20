@@ -1,37 +1,60 @@
 div.form_install {
 	text-align: center;
 }
-/* label color */
-.input-field label {
+.input-field label,
+.input-field .prefix {
 	color: #808080;
 }
-/* label focus color */
-.input-field input[type=text]:focus + label {
+.input-field input[type=text]:focus + label,
+.input-field .prefix.active {
 	color: #000000;
 }
-/* label underline focus color */
 .input-field input[type=text]:focus {
 	border-bottom: 1px solid #000000;
 	box-shadow: 0 1px 0 0 #000000;
 }
-/* valid color */
 .input-field input[type=text].valid {
 	border-bottom: 1px solid #008000;
 	box-shadow: 0 1px 0 0 #008000;
 }
-/* invalid color */
 .input-field input[type=text].invalid {
 	border-bottom: 1px solid #FF0000;
 	box-shadow: 0 1px 0 0 #FF0000;
 }
-/* icon prefix color */
-.input-field .prefix {
-	color: #808080;
-}
-/* icon prefix focus color */
-.input-field .prefix.active {
-	color: #000000;
-}
 .big_form_install {
 	margin-top: 25%;
+}
+.btn {
+	background-color: #D3D3D3;
+}
+.btn:hover {
+	background-color: #3F3F3F;
+}
+.btn:focus {
+	outline: none;
+	background-color: #000000;
+}
+.floated-left {
+	float: left;
+}
+.floated-right {
+	float: right;
+}
+.not_complete {
+	color: red;
+}
+.fully_complete {
+	color: green;
+}
+.alert-success {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	background-color: green;
+}
+.alert-failed {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	background-color: red;
 }
