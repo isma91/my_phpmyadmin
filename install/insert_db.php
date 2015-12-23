@@ -21,7 +21,7 @@ try {
 		  `first_name` varchar(255) NOT NULL,
 		  `last_name` varchar(255) NOT NULL,
 		  `username` varchar(255) NOT NULL,
-		  `birthdate` datetime NOT NULL
+		  `birthdate` date NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 		INSERT INTO `user`(`id`, `first_name`, `last_name`, `username`, `birthdate`)
 		VALUES ('1','" . $_POST["first_name"] . "','" . $_POST["last_name"] . "','" . $_POST["username"] . "','" . $birthdate . "')";
