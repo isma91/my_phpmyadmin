@@ -20,7 +20,6 @@ return [
 		'user' => '" . $_POST["db_username"] . "',
 		'password' => '" . $_POST["db_password"] . "',
 	],
-	'install' => true
 ];";
 $config_file = file_put_contents("../config.php", $config);
 echo $config_file;

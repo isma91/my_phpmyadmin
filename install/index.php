@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="description" content="Installation of My_PHPMyAdmin" />
   <title>Installing My_PHPMyAdmin</title>
+  <link media="all" type="text/css" rel="stylesheet" href="./../media/css/mui.min.css" />
   <link media="all" type="text/css" rel="stylesheet" href="./../media/css/materialize.min.css" />
   <link media="all" type="text/css" rel="stylesheet" href="./../media/css/google_material_icons.css" />
   <link media="all" type="text/css" rel="stylesheet" href="./install.css" />
   <script src="./../media/js/jquery-2.1.4.min.js"></script>
+  <script src="./../media/js/mui.min.js"></script>
   <script src="./../media/js/materialize.min.js"></script>
   <script src="./install.js"></script>
 </head>
@@ -76,12 +78,21 @@
           </div>
           <div class="row">
             <div class="container"> 
-             <button class="btn waves-effect waves-light floated-left" id="db_create" type="button" name="action">
+             <button class="btn waves-effect waves-light floated-left" id="db_create" type="button">
                CREATE DATABASE
              </button>
-             <button class="btn waves-effect waves-light floated-right" id="db_test" type="button" name="action">
+             <button class="btn waves-effect waves-light floated-right" id="db_test" type="button">
                TRY CONNECTION
              </button>
+           </div>
+         </div>
+         <div class="row">
+           <div class="title" id="finish_install">
+             <div class="container">
+               <button class="btn waves-effect waves-light" id="button_finish_install" type="button">
+                 FINISH INSTALL
+               </button>
+             </div>
            </div>
          </div>
        </div>
