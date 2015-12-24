@@ -1,5 +1,7 @@
 # my_phpmyadmin
-##A personnal PHPMyAdmin
+##A personnal PHPMyAdmin 
+###You must have PHP 5.5 or more, Apache 2.4 or more and MySQL 5.5 or more
+####For now this personnal PHPMyAdmin can be used only for Apache2 and MySQL 5
 Please make sure the project path is writtable by the web server.  
 For exemple, the project name is ```my_phpmyadmin``` and he's in ```/var/www/``` :  
 
