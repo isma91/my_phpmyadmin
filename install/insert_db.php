@@ -17,7 +17,7 @@ try {
     $birth_time = strtotime($_POST["birthdate"]);
     $birthdate = date('Y-m-d', $birth_time);
     $bdd = new PDO("mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["db_name"], $_POST["db_username"], $_POST["db_password"]);
-    $sql = "CREATE TABLE IF NOT EXISTS `user` (
+    $sql = "CREATE TABLE IF NOT EXISTS `users` (
           `id` int(11) PRIMARY KEY NOT NULL,
           `first_name` varchar(255) NOT NULL,
           `last_name` varchar(255) NOT NULL,
