@@ -11,6 +11,7 @@
 * @author   isma91 <ismaydogmus@gmail.com>
 * @author   Raph <rbleuzet@gmail.com>
 * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+* @link     https://github.com/isma91/my_phpmyadmin/blob/master/install/install_db.php
 */
 $duplicate_database = false;
 try {
