@@ -26,3 +26,10 @@
 	border-bottom: 1px solid #FF0000;
 	box-shadow: 0 1px 0 0 #FF0000;
 }
+#connection:hover {
+	background-color: #D3D3D3;
+}
+#connection:focus {
+	outline: none;
+	background-color: #808080;
+}
