@@ -1,3 +1,8 @@
+<?php
+if (file_exists('./../config.php')) {
+    header('Location: ./../');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>

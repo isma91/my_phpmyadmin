@@ -30,6 +30,7 @@
   <script src="./media/js/jquery-2.1.4.min.js"></script>
   <script src="./media/js/mui.min.js"></script>
   <script src="./media/js/materialize.min.js"></script>
+  <script src="./media/js/index.js"></script>
 </head>
 <body>
   <div class="container">
@@ -48,6 +49,7 @@
           <label for="db_password">password</label>
         </div>
       </div>
+      <button class="waves-effect waves-teal btn-flat" id="connection">Connection</button>
     </div>
   </div>
 </body>
