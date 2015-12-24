@@ -22,10 +22,12 @@ try {
           `first_name` varchar(255) NOT NULL,
           `last_name` varchar(255) NOT NULL,
           `username` varchar(255) NOT NULL,
-          `birthdate` date NOT NULL
+          `password` varchar(255) NOT NULL,
+          `birthdate` date NOT NULL,
+          `token` text NULL DEFAULT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-        INSERT INTO `user`(`id`, `first_name`, `last_name`, `username`, `birthdate`)
-        VALUES ('1','" . $_POST["first_name"] . "','" . $_POST["last_name"] . "','" . $_POST["username"] . "','" . $birthdate . "')";
+        INSERT INTO `user`(`id`, `first_name`, `last_name`, `username`, `password`, `birthdate`)
+        VALUES ('1','" . $_POST["first_name"] . "','" . $_POST["last_name"] . "','" . $_POST["username"] . "','" . password_hash($_POST["password"], PASSWORD_DEFAULT) . "', '" . $birthdate . "')";
         $create_tables = $bdd->exec($sql);
     if ($create_tables === 0) {
         echo "true";

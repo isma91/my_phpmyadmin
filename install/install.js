@@ -10,7 +10,7 @@ $(document).ready(function(){
         selectYears: 100
     });
     $("input").bind('change paste keyup', function() {
-        if ($.trim($("input#first_name").val()) === "" || $.trim($("input#last_name").val()) === "" || $.trim($("input#username").val()) === "" || $.trim($("input#birthdate").val()) === "") {
+        if ($.trim($("input#first_name").val()) === "" || $.trim($("input#last_name").val()) === "" || $.trim($("input#username").val()) === "" || $("input#password").val() === "" || $.trim($("input#birthdate").val()) === "") {
             admin_profile_clear = false;
             $("div#form_install_admin_profile").html('<i class="large material-icons">face</i>Admin Profile <span class="not_complete">Not complete</span>');
         } else {
@@ -70,7 +70,7 @@ $(document).ready(function(){
                 Materialize.toast('<p class="alert-failed">A problem occurred when the demand for ceating config file<p>', 4000, 'rounded alert-failed');
             }
         });
-        $.post('insert_db.php', {host: $("input#host").val(), db_username: $("input#db_username").val(), db_password: $("input#db_password").val(), db_name: $("input#db_name").val(), first_name: $.trim($("input#first_name").val()), last_name: $.trim($("input#last_name").val()), username: $.trim($("input#username").val()), birthdate: $.trim($("input#birthdate").val())}, function (data, textStatus) {
+        $.post('insert_db.php', {host: $("input#host").val(), db_username: $("input#db_username").val(), db_password: $("input#db_password").val(), db_name: $("input#db_name").val(), first_name: $.trim($("input#first_name").val()), last_name: $.trim($("input#last_name").val()), username: $.trim($("input#username").val()), password: $("input#password").val(), birthdate: $.trim($("input#birthdate").val())}, function (data, textStatus) {
             if (textStatus === "success") {
                 if (data === "true") {
                     Materialize.toast('<p class="alert-success">Table and user created<p>', 4000, 'rounded alert-success');

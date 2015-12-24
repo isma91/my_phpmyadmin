@@ -37,10 +37,15 @@ if (file_exists('./../config.php')) {
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s6">
               <i class="material-icons prefix">account_circle</i>
               <input name="username" id="username" type="text" >
               <label for="username">Username</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">security</i>
+              <input name="password" id="password" type="password" >
+              <label for="password">password</label>
             </div>
           </div>
           <div class="row">
