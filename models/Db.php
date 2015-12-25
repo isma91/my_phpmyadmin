@@ -47,10 +47,10 @@ class Db
     */
     public function __construct()
     {
-        if (!file_exists('./../config.php')) {
-            throw new Exception("No config.php file in the root of the project", 1);
+        if (file_exists('config.php')) {
+            $config = include 'config.php';
         } else {
-            $config = include './../config.php';
+            $config = include '../config.php';
         }
         $this->_db = new \PDO('mysql:host=' . $config['databases']['host'] . ';dbname=' . $config['databases']['dbname'], $config['databases']['user'], $config['databases']['password']);
     }
