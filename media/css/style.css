@@ -33,3 +33,18 @@
 	outline: none;
 	background-color: #808080;
 }
+.alert-success {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	background-color: green;
+}
+.alert-failed {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	background-color: red;
+}
+.incomplete {
+	color: red;
+}
