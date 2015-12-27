@@ -15,12 +15,30 @@
 */
 session_start();
 require './../autoload.php';
-
-//use controllers\BlogsController;
-
-/*if (isset($_GET['blog'])) {
-	$limit = (isset($_GET['limit']) && (is_int($_GET['limit']) || is_numeric($_GET['limit']))) ? $_GET['limit'] : 10;
-	$o = new BlogsController();
-	$blog = $o->getBlogBySlug($_GET['blog'], $limit);
+use controllers\UsersController;
+use controllers\DatabasesController;
+if (isset($_GET['checkRight'])) {
+    echo DatabasesController::checkRight();
+}
+if (isset($_GET['logout'])) {
+    if (isset($_SESSION['token']) && $_SESSION['token'] == $_GET['token']) {
+        session_destroy();
+        //header('Location: ./');
+    }
+}
+/*if (isset($_GET['register'])) {
+    $o = new UsersController();
+    if ($o->create($_POST["username"], $_POST["lastname"], $_POST["firstname"] , $_POST["email"], $_POST["password"], $_POST["confirm_password"], $_POST["email"])) {
+        $o->connection($_POST['username'], $_POST['password']);
+    }
+    $error_sign_up = $o->getError();
 }*/
+if (isset($_GET['connected'])) {
+    $connected = UsersController::isConnected();
+    if ($connected) {
+        echo json_encode(array('connected' => true, 'id' => $_SESSION['id'], 'token' => $_SESSION['token'], 'name' => $_SESSION['name']));
+    } else {
+        echo json_encode(array('connected' => false));
+    }
+}
 ?>

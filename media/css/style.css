@@ -48,3 +48,6 @@
 .incomplete {
 	color: red;
 }
+img.imgLogo {
+	width: 100%;
+}
