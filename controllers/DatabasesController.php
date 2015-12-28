@@ -32,7 +32,7 @@ use models\Database;
 */
 class DatabasesController extends Database
 {
-    function checkRight ()
+    public function checkRight ()
     {
         if (file_exists('config.php')) {
             $config = include 'config.php';
@@ -54,7 +54,7 @@ class DatabasesController extends Database
             return 'false';
         }
     }
-    function showDatabases ()
+    public function showDatabases ()
     {
         $db = new Db();
         if (!isset($_SESSION['id']) && !isset($_SESSION['token'])) {
@@ -73,7 +73,7 @@ class DatabasesController extends Database
             return 'false';
         }
     }
-    function showTables ($databaseName)
+    public function showTables ($databaseName)
     {
         if (is_array($databaseName)) {
             $db = new Db();
@@ -100,6 +100,21 @@ class DatabasesController extends Database
                 }
             }
             return json_encode($allTables);
+        } else {
+            return 'false';
+        }
+    }
+    public function showColumns($databaseName, $tableName)
+    {
+        $db = new Db();
+        if (!isset($_SESSION['id']) && !isset($_SESSION['token'])) {
+            return 'false';
+        }
+        $get = $db->getDb()->prepare('SHOW COLUMNS FROM `' . $tableName . '` FROM `' . $databaseName . '`');
+        $get->execute();
+        $columns = $get->fetchAll(\PDO::FETCH_ASSOC);
+        if ($columns) {
+            return json_encode($columns);
         } else {
             return 'false';
         }
