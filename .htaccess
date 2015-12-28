@@ -1,0 +1,1 @@
+ErrorDocument 404 /views/errors/404.php
