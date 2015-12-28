@@ -119,4 +119,19 @@ class DatabasesController extends Database
             return 'false';
         }
     }
+    public function showTableStatus ($databaseName)
+    {
+        $db = new Db();
+        if (!isset($_SESSION['id']) && !isset($_SESSION['token'])) {
+            return 'false';
+        }
+        $get = $db->getDb()->prepare('SHOW TABLE STATUS FROM `' . $databaseName . '`');
+        $get->execute();
+        $status = $get->fetchAll(\PDO::FETCH_ASSOC);
+        if ($status) {
+            return json_encode($status);
+        } else {
+            return 'false';
+        }
+    }
 }

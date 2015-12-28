@@ -25,6 +25,8 @@ if (isset($_GET['checkRight'])) {
     echo DatabasesController::showTables($_POST['arrayDatabase']);
 } elseif (isset($_GET['showColumns']) && $_POST['databaseName'] && $_POST['tableName']) {
     echo DatabasesController::showColumns($_POST['databaseName'], $_POST['tableName']);
+} elseif (isset($_GET['showTableStatus']) && $_POST['databaseName']) {
+    echo DatabasesController::showTableStatus($_POST['databaseName']);
 } elseif (isset($_GET['logout'])) {
     if (isset($_SESSION['token']) && $_SESSION['token'] == $_GET['token']) {
         session_destroy();
