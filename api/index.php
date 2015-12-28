@@ -19,11 +19,21 @@ use controllers\UsersController;
 use controllers\DatabasesController;
 if (isset($_GET['checkRight'])) {
     echo DatabasesController::checkRight();
-}
-if (isset($_GET['logout'])) {
+} elseif (isset($_GET['showDatabases'])) {
+    echo DatabasesController::showDatabases();
+} elseif (isset($_GET['showTables']) && $_POST['arrayDatabase']) {
+    echo DatabasesController::showTables($_POST['arrayDatabase']);
+} elseif (isset($_GET['logout'])) {
     if (isset($_SESSION['token']) && $_SESSION['token'] == $_GET['token']) {
         session_destroy();
         //header('Location: ./');
+    }
+} elseif (isset($_GET['connected'])) {
+    $connected = UsersController::isConnected();
+    if ($connected) {
+        echo json_encode(array('connected' => true, 'id' => $_SESSION['id'], 'token' => $_SESSION['token'], 'name' => $_SESSION['name']));
+    } else {
+        echo json_encode(array('connected' => false));
     }
 }
 /*if (isset($_GET['register'])) {
@@ -33,12 +43,4 @@ if (isset($_GET['logout'])) {
     }
     $error_sign_up = $o->getError();
 }*/
-if (isset($_GET['connected'])) {
-    $connected = UsersController::isConnected();
-    if ($connected) {
-        echo json_encode(array('connected' => true, 'id' => $_SESSION['id'], 'token' => $_SESSION['token'], 'name' => $_SESSION['name']));
-    } else {
-        echo json_encode(array('connected' => false));
-    }
-}
 ?>
