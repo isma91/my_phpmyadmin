@@ -31,7 +31,7 @@
     </header>
     <div id="content-wrapper">
       <div class="mui--appbar-height"></div>
-      <div class="mui-container-fluid">
+      <div class="mui-container-fluid" id="theBody">
       </div>
     </div>
   </div>
