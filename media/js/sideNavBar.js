@@ -1,50 +1,25 @@
-jQuery(function($) {
-  var $bodyEl = $('body'),
-      $sidedrawerEl = $('#sidedrawer');
-  
-  
-  // ==========================================================================
-  // Toggle Sidedrawer
-  // ==========================================================================
+/*jslint browser: true, node : true*/
+/*jslint devel : true*/
+/*global $, document, this, Materialize*/
+$(document).ready(function () {
+  var body, sidedrawer, overlay, title, overlay, options;
+  body = $('body');
+  sidedrawer = $('#sidedrawer');
   function showSidedrawer() {
-    // show overlay
-    var options = {
+    options = {
       onclose: function() {
-        $sidedrawerEl
-          .removeClass('active')
-          .appendTo(document.body);
+        sidedrawer.removeClass('active').appendTo(document.body);
       }
     };
-    
-    var $overlayEl = $(mui.overlay('on', options));
-    
-    // show element
-    $sidedrawerEl.appendTo($overlayEl);
+    overlay = $(mui.overlay('on', options));
+    sidedrawer.appendTo(overlay);
     setTimeout(function() {
-      $sidedrawerEl.addClass('active');
+      sidedrawer.addClass('active');
     }, 20);
-  }
-  
-  
+  };
   function hideSidedrawer() {
-    $bodyEl.toggleClass('hide-sidedrawer');
-  }
-  
-  
+    body.toggleClass('hide-sidedrawer');
+  };
   $('.js-show-sidedrawer').on('click', showSidedrawer);
   $('.js-hide-sidedrawer').on('click', hideSidedrawer);
-  
-  
-  // ==========================================================================
-  // Animate menu
-  // ==========================================================================
-  var $titleEls = $('strong', $sidedrawerEl);
-  
-  $titleEls
-    .next()
-    .hide();
-  
-  $titleEls.on('click', function() {
-    $(this).next().slideToggle(200);
-  });
 });

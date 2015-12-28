@@ -51,3 +51,9 @@
 img.imgLogo {
 	width: 100%;
 }
+.mui-appbar {
+	background-color: #A9A9A9;
+}
+.tables {
+	text-align: center;
+}

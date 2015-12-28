@@ -8,39 +8,15 @@
   include './views/header.php';
   ?>
   <link media="all" type="text/css" rel="stylesheet" href="./media/css/sideNavBar.css" />
-  <script src="./media/js/sideNavBar.js"></script>
   <script src="./media/js/home.js"></script>
+  <script src="./media/js/sideNavBar.js"></script>
 </head>
 <body>
   <div class="mui-container">
     <div id="sidedrawer" class="mui--no-user-select">
       <div id="sidedrawer-brand" class="mui--appbar-line-height mui--text-title"><img class="imgLogo" src="./media/img/logo.png"></div>
       <div class="mui-divider"></div>
-      <ul>
-        <li>
-          <strong>Database 1</strong>
-          <ul>
-            <li><a href="#">Table 1</a></li>
-            <li><a href="#">Table 2</a></li>
-            <li><a href="#">Table 3</a></li>
-          </ul>
-        </li>
-        <li>
-          <strong>Database 2</strong>
-          <ul>
-            <li><a href="#">Table 1</a></li>
-            <li><a href="#">Table 2</a></li>
-            <li><a href="#">Table 3</a></li>
-          </ul>
-        </li>
-        <li>
-          <strong>Database 3</strong>
-          <ul>
-            <li><a href="#">Table 1</a></li>
-            <li><a href="#">Table 2</a></li>
-            <li><a href="#">Table 3</a></li>
-          </ul>
-        </li>
+      <ul id="databases">
       </ul>
     </div>
     <header id="header">
@@ -48,6 +24,7 @@
         <div class="mui-container-fluid">
           <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">☰</a>
           <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">☰</a>
+          <span class="title">Welcome <span id="username"><?php echo $_SESSION['username']; ?></span></span>
           <span class="mui--text-title mui--visible-xs-inline-block">My_PHPMyAdmin</span>
         </div>
       </div>
