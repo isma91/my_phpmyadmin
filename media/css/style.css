@@ -26,12 +26,17 @@
 	border-bottom: 1px solid #FF0000;
 	box-shadow: 0 1px 0 0 #FF0000;
 }
-#connection:hover {
+#connection:hover,
+#logout:hover {
 	background-color: #D3D3D3;
 }
-#connection:focus {
+#connection:focus,
+#logout:focus {
 	outline: none;
 	background-color: #808080;
+}
+#logout {
+	float: right;
 }
 .alert-success {
 	width: 100%;
@@ -56,4 +61,5 @@ img.imgLogo {
 }
 .tables {
 	text-align: center;
+	width: 100%;
 }

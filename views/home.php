@@ -25,14 +25,14 @@
           <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">☰</a>
           <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">☰</a>
           <span class="title">Welcome <span id="username"><?php echo $_SESSION['username']; ?></span></span>
+          <a href="?logout=1&token=<?php echo $_SESSION["token"]; ?>" class="waves-effect waves-light btn-flat btn-large" id="logout">Logout</a>
           <span class="mui--text-title mui--visible-xs-inline-block">My_PHPMyAdmin</span>
         </div>
       </div>
     </header>
     <div id="content-wrapper">
       <div class="mui--appbar-height"></div>
-      <div class="mui-container-fluid" id="theBody">
-      </div>
+      <div class="mui-container-fluid" id="theBody"></div>
     </div>
   </div>
 </body>

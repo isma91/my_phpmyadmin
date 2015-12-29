@@ -26,7 +26,7 @@
           <label for="password">password</label>
         </div>
       </div>
-      <button class="waves-effect waves-teal btn-flat" id="connection">Connection</button>
+      <button class="waves-effect waves-light btn-flat" id="connection">Connection</button>
     </div>
   </div>
 </body>

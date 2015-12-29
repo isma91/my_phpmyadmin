@@ -27,15 +27,10 @@ if (isset($_GET['checkRight'])) {
     echo DatabasesController::showColumns($_POST['databaseName'], $_POST['tableName']);
 } elseif (isset($_GET['showTableStatus']) && $_POST['databaseName']) {
     echo DatabasesController::showTableStatus($_POST['databaseName']);
-} elseif (isset($_GET['logout'])) {
-    if (isset($_SESSION['token']) && $_SESSION['token'] == $_GET['token']) {
-        session_destroy();
-        //header('Location: ./');
-    }
 } elseif (isset($_GET['connected'])) {
     $connected = UsersController::isConnected();
     if ($connected) {
-        echo json_encode(array('connected' => true, 'id' => $_SESSION['id'], 'token' => $_SESSION['token'], 'name' => $_SESSION['name']));
+        echo json_encode(array('connected' => true, 'id' => $_SESSION['id'], 'token' => $_SESSION['token'], 'username' => $_SESSION['username']));
     } else {
         echo json_encode(array('connected' => false));
     }

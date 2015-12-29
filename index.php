@@ -43,6 +43,11 @@ $connected = UsersController::isConnected();
 if (isset($_GET['connection'])) {
     $o = new UsersController();
     echo $o->connection($_POST['username'], $_POST['password']);
+} elseif (isset($_GET['logout']) && $_GET['token']) {
+    if (isset($_SESSION['token']) && $_SESSION['token'] == $_GET['token']) {
+        session_destroy();
+        redirect('index');
+    }
 } elseif (isset($_GET["page"]) && $connected === "true") {
     redirect($_GET['page']);
 } else {
