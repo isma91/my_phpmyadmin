@@ -27,11 +27,13 @@
 	box-shadow: 0 1px 0 0 #FF0000;
 }
 #connection:hover,
-#logout:hover {
+#logout:hover,
+.mui-btn--raised:hover {
 	background-color: #D3D3D3;
 }
 #connection:focus,
-#logout:focus {
+#logout:focus,
+.mui-btn--raised:focus {
 	outline: none;
 	background-color: #808080;
 }
