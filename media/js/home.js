@@ -2,7 +2,7 @@
 /*jslint devel : true*/
 /*global $, document, this, Materialize*/
 $(document).ready(function () {
-    var username, databases, databaseName, tableName, columns;
+    var username, databases, databaseName, tableName, columns, dbName;
     $.post('api/?checkRight', function (data, textStatus) {
         if (textStatus === "success") {
             username = $("span#username").html();
@@ -15,6 +15,35 @@ $(document).ready(function () {
             $("#info").html("Host = '" + data.Host + "' User = '" + data.User + "'");*/
         }
     });
+    function showColumns (dbName, tabName) {
+        $.post('api/?showColumns', {databaseName: dbName, tableName: tabName}, function (tableColumns, textStatus) {
+            if (textStatus === "success") {
+                tableColumns = JSON.parse(tableColumns);
+                columns = '';
+                columns = columns + '<table class="mui-table"><thead><tr><th>#</th><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead><tbody>';
+                $.each(tableColumns, function (index, column) {
+                    if (column.Default === null && column.Null === "NO") {
+                        column.Default = "No default variable";
+                    }
+                    if (column.Extra === "") {
+                        column.Extra = "No extra";
+                    }
+                    if (column.Key === "PRI") {
+                        column.Key = "PRIMARY KEY";
+                    } else if (column.Key === "UNI") {
+                        column.Key = "UNIQUE";
+                    } else if (column.Key === "MUL") {
+                        column.Key = "MULTIPLE";
+                    } else if (column.Key === "") {
+                        column.Key = "Not indexed";
+                    }
+                    columns = columns + '<tr><td>'+ index + '</td><td>' + column.Field + '</td><td>' + column.Type + '</td><td>' + column.Null + '</td><td>' + column.Key  + '</td><td>' + column.Default + '</td><td>' + column.Extra + '</td></tr>';
+                });
+                columns = columns + '</tbody></table>';
+                $('#theBody').html(columns);
+            }
+        });
+    }
     $.post('api/?showDatabases', function (allDatabases, textStatus) {
         if (textStatus === "success") {
             allDatabases = JSON.parse(allDatabases);
@@ -39,7 +68,8 @@ $(document).ready(function () {
                         $(this).next().slideToggle(200);
                     });
                     $('strong').click(function () {
-                        $.post('api/?showTableStatus', {databaseName: $(this).attr('id')}, function (tablesStatus, textStatus) {
+                        dbName = $(this).attr('id');
+                        $.post('api/?showTableStatus', {databaseName: dbName}, function (tablesStatus, textStatus) {
                             if (textStatus === "success") {
                                 tablesStatus = JSON.parse(tablesStatus);
                                 status = '';
@@ -49,45 +79,20 @@ $(document).ready(function () {
                                 } else {
                                     status = status + '<div class="mui-panel"><table class="responsive-table centered highlight"><thead><tr><th class="tooltipped" data-position="top" data-tooltip="The name of the table">Name</th><th class="tooltipped" data-position="top" data-tooltip="The number of rows">Row(s)</th><th class="tooltipped" data-position="top" data-tooltip="The row-storage format (Fixed, Dynamic, Compressed, Redundant, Compact)">Row format</th><th class="tooltipped" data-position="top" data-tooltip="The table\'s character set and collation">Collation</th><th class="tooltipped" data-position="top" data-tooltip="When the table was created">Create date</th><th class="tooltipped" data-position="top" data-tooltip="The storage engine for the table">Engine</th><th class="tooltipped" data-position="top" data-tooltip="The version number of the table">Version</th><th class="tooltipped" data-position="top" data-tooltip="When the data file was last updated. For some storage engines, this value is NULL">Update date</th><th class="tooltipped" data-position="top" data-tooltip="When the table was last checked. Not all storage engines update this time, in which case the value is always NULL">Last check date</th><th class="tooltipped" data-position="top" data-tooltip="The comment used when creating the table (or information as to why MySQL could not access the table information)">Comment</th><th class="tooltipped" data-position="top" data-tooltip="Extra options used with \'CREATE TABLE\'. The original options supplied when \'CREATE TABLE\' is called are retained and the options reported here may differ from the active table settings and options">Create options</th></tr></thead><tbody>';
                                     $.each(tablesStatus, function (index, tableStatus) {
-                                        status = status + '<tr><td>' + tableStatus.Name + '</td><td>' + tableStatus.Rows + '</td><td>' + tableStatus.Row_format + '</td><td>' + tableStatus.Collation + '</td><td>' + tableStatus.Create_time + '</td><td>' + tableStatus.Engine + '</td><td>' + tableStatus.Version + '</td><td>' + tableStatus.Update_time + '</td><td>' + tableStatus.Check_time + '</td><td>' + tableStatus.Comment + '</td><td>' + tableStatus.Create_options + '</td></tr>';
+                                        status = status + '<tr><td><a href="#" class="mui-btn mui-btn--raised table_in_' + dbName + '">' + tableStatus.Name + '</a></td><td>' + tableStatus.Rows + '</td><td>' + tableStatus.Row_format + '</td><td>' + tableStatus.Collation + '</td><td>' + tableStatus.Create_time + '</td><td>' + tableStatus.Engine + '</td><td>' + tableStatus.Version + '</td><td>' + tableStatus.Update_time + '</td><td>' + tableStatus.Check_time + '</td><td>' + tableStatus.Comment + '</td><td>' + tableStatus.Create_options + '</td></tr>';
                                     });
                                 }
                                 status = status + '</tbody></table></div>';
                                 $("#theBody").html(status);
                                 $('.tooltipped').tooltip({delay: 50});
                             }
+                            $('a', 'td', 'tr').click(function () {
+                                showColumns($(this).attr('class').substr($(this).attr('class').search("table_in_") + 9), $(this).text());
+                            });
                         });
                     });
                     $('a', 'li', 'ul.tables').click(function () {
-                        databaseName = $(this).attr('class').substr($(this).attr('class').search("table_in_") + 9);
-                        tableName = $(this).text();
-                        $.post('api/?showColumns', {databaseName: databaseName, tableName: tableName}, function (tableColumns, textStatus) {
-                            if (textStatus === "success") {
-                                tableColumns = JSON.parse(tableColumns);
-                                columns = '';
-                                columns = columns + '<table class="mui-table"><thead><tr><th>#</th><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead><tbody>';
-                                $.each(tableColumns, function (index, column) {
-                                    if (column.Default === null && column.Null === "NO") {
-                                        column.Default = "No default variable";
-                                    }
-                                    if (column.Extra === "") {
-                                        column.Extra = "No extra";
-                                    }
-                                    if (column.Key === "PRI") {
-                                        column.Key = "PRIMARY KEY";
-                                    } else if (column.Key === "UNI") {
-                                        column.Key = "UNIQUE";
-                                    } else if (column.Key === "MUL") {
-                                        column.Key = "MULTIPLE";
-                                    } else if (column.Key === "") {
-                                        column.Key = "Not indexed";
-                                    }
-                                    columns = columns + '<tr><td>'+ index + '</td><td>' + column.Field + '</td><td>' + column.Type + '</td><td>' + column.Null + '</td><td>' + column.Key  + '</td><td>' + column.Default + '</td><td>' + column.Extra + '</td></tr>';
-                                });
-                                columns = columns + '</tbody></table>';
-                                $('#theBody').html(columns);
-                            }
-                        });
+                        showColumns($(this).attr('class').substr($(this).attr('class').search("table_in_") + 9), $(this).text());
                     });
                 }
             });
