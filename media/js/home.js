@@ -52,7 +52,7 @@ $(document).ready(function () {
                     allTables = JSON.parse(allTables);
                     databases = '';
                     $.each(allTables, function (database, tables) {
-                        databases = databases + '<li><strong id="' + database + '">' + database + '<div class="mui-divider"></div><span class="databaseLength">' + tables.length + ' Table(s)</span></strong><ul class="tables">';
+                        databases = databases + '<li><strong id="' + database + '">' + database + '<div class="mui-divider"></div><span class="databaseLength">' + tables.length + ' Table(s)</span></strong><ul class="tables"><li><a href="#" class="mui-btn mui-btn--flat table_in_' + database + '"><span class="material-icons">playlist_add</span>Add table</a></li>';
                         if (tables.length === 0) {
                             databases = databases + '<li>Empty</li></ul></li>';
                         } else {
