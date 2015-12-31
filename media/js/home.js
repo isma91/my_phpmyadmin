@@ -52,12 +52,12 @@ $(document).ready(function () {
                     allTables = JSON.parse(allTables);
                     databases = '';
                     $.each(allTables, function (database, tables) {
-                        databases = databases + '<li><strong id="' + database + '">' + database + '<div class="mui-divider"></div><span class="databaseLength">' + tables.length + ' Table(s)</span></strong><ul class="tables"><li><a href="#" class="mui-btn mui-btn--flat table_in_' + database + '"><span class="material-icons">playlist_add</span>Add table</a></li>';
+                        databases = databases + '<li><strong id="' + database + '">' + database + '<div class="mui-divider"></div><span class="databaseLength">' + tables.length + ' Table(s)</span></strong><ul class="tables"><li><a href="#" class="mui-btn mui-btn--flat add_table table_in_' + database + '"><span class="material-icons">playlist_add</span>Add table</a></li>';
                         if (tables.length === 0) {
                             databases = databases + '<li>Empty</li></ul></li>';
                         } else {
                             $.each(tables, function (number, table) {
-                                databases = databases + '<li><a href="#" class="mui-btn mui-btn--flat table_in_' + database + '">' + table + '</a></li>';
+                                databases = databases + '<li><a href="#" class="mui-btn mui-btn--flat show_columns_by_table table_in_' + database + '">' + table + '</a></li>';
                             });
                             databases = databases + '</ul></li>';
                         }
@@ -77,21 +77,21 @@ $(document).ready(function () {
                                     status = '<h1 class="title">No Table</h1>';
                                     $("#theBody").html(status);
                                 } else {
-                                    status = status + '<div class="mui-panel"><table class="responsive-table centered highlight"><thead><tr><th class="tooltipped" data-position="top" data-tooltip="The name of the table">Name</th><th class="tooltipped" data-position="top" data-tooltip="The number of rows">Row(s)</th><th class="tooltipped" data-position="top" data-tooltip="The row-storage format (Fixed, Dynamic, Compressed, Redundant, Compact)">Row format</th><th class="tooltipped" data-position="top" data-tooltip="The table\'s character set and collation">Collation</th><th class="tooltipped" data-position="top" data-tooltip="When the table was created">Create date</th><th class="tooltipped" data-position="top" data-tooltip="The storage engine for the table">Engine</th><th class="tooltipped" data-position="top" data-tooltip="The version number of the table">Version</th><th class="tooltipped" data-position="top" data-tooltip="When the data file was last updated. For some storage engines, this value is NULL">Update date</th><th class="tooltipped" data-position="top" data-tooltip="When the table was last checked. Not all storage engines update this time, in which case the value is always NULL">Last check date</th><th class="tooltipped" data-position="top" data-tooltip="The comment used when creating the table (or information as to why MySQL could not access the table information)">Comment</th><th class="tooltipped" data-position="top" data-tooltip="Extra options used with \'CREATE TABLE\'. The original options supplied when \'CREATE TABLE\' is called are retained and the options reported here may differ from the active table settings and options">Create options</th></tr></thead><tbody>';
+                                    status = status + '<div class="mui-panel"><table class="responsive-table centered highlight"><thead><tr><th class="tooltipped" data-position="top" data-tooltip="The name of the table">Name</th><th class="tooltipped" data-position="top" data-tooltip="The number of rows">Row(s)</th><th class="tooltipped" data-position="top" data-tooltip="The row-storage format (Fixed, Dynamic, Compressed, Redundant, Compact)">Row format</th><th class="tooltipped" data-position="top" data-tooltip="The table\'s character set and collation">Collation</th><th class="tooltipped" data-position="top" data-tooltip="When the table was created">Create date</th><th class="tooltipped" data-position="top" data-tooltip="The storage engine for the table">Engine</th><th class="tooltipped" data-position="top" data-tooltip="The version number of the table">Version</th><th class="tooltipped" data-position="top" data-tooltip="When the data file was last updated. For some storage engines, this value is NULL">Update date</th><th class="tooltipped" data-position="top" data-tooltip="When the table was last checked. Not all storage engines update this time, in which case the value is always NULL">Last check date</th><th class="tooltipped" data-position="top" data-tooltip="The comment used when creating the table (or information as to why MySQL could not access the table information)">Comment</th></tr></thead><tbody>';
                                     $.each(tablesStatus, function (index, tableStatus) {
-                                        status = status + '<tr><td><a href="#" class="mui-btn mui-btn--raised table_in_' + dbName + '">' + tableStatus.Name + '</a></td><td>' + tableStatus.Rows + '</td><td>' + tableStatus.Row_format + '</td><td>' + tableStatus.Collation + '</td><td>' + tableStatus.Create_time + '</td><td>' + tableStatus.Engine + '</td><td>' + tableStatus.Version + '</td><td>' + tableStatus.Update_time + '</td><td>' + tableStatus.Check_time + '</td><td>' + tableStatus.Comment + '</td><td>' + tableStatus.Create_options + '</td></tr>';
+                                        status = status + '<tr><td><a href="#" class="mui-btn mui-btn--raised status table_in_' + dbName + '">' + tableStatus.Name + '</a></td><td>' + tableStatus.Rows + '</td><td>' + tableStatus.Row_format + '</td><td>' + tableStatus.Collation + '</td><td>' + tableStatus.Create_time + '</td><td>' + tableStatus.Engine + '</td><td>' + tableStatus.Version + '</td><td>' + tableStatus.Update_time + '</td><td>' + tableStatus.Check_time + '</td><td>' + tableStatus.Comment + '</td></tr>';
                                     });
                                 }
                                 status = status + '</tbody></table></div>';
                                 $("#theBody").html(status);
                                 $('.tooltipped').tooltip({delay: 50});
                             }
-                            $('a', 'td', 'tr').click(function () {
+                            $('a.status', 'td', 'tr').click(function () {
                                 showColumns($(this).attr('class').substr($(this).attr('class').search("table_in_") + 9), $(this).text());
                             });
                         });
                     });
-                    $('a', 'li', 'ul.tables').click(function () {
+                    $('a.show_columns_by_table', 'li', 'ul.tables').click(function () {
                         showColumns($(this).attr('class').substr($(this).attr('class').search("table_in_") + 9), $(this).text());
                     });
                 }
