@@ -2,7 +2,7 @@
 /*jslint devel : true*/
 /*global $, document, this, Materialize*/
 $(document).ready(function () {
-    var username, databases, databaseName, tableName, columns, dbName;
+    var username, databases, databaseName, tableName, columns, dbName, addTable;
     $.post('api/?checkRight', function (data, textStatus) {
         if (textStatus === "success") {
             username = $("span#username").html();
@@ -66,6 +66,14 @@ $(document).ready(function () {
                     $('strong', '#sidedrawer').next().hide();
                     $('strong', '#sidedrawer').on('click', function() {
                         $(this).next().slideToggle(200);
+                    });
+                    $("a.add_table").click(function () {
+                        databaseName = $(this).attr('class').substr($(this).attr('class').search("table_in_") + 9);
+                        addTable = '';
+                        addTable = addTable + '<table class="responsive-table centered highlight"><thead><tr><th class="tooltipped" data-position="top" data-tooltip="The name of the column">Name</th><th class="tooltipped" data-position="top" data-tooltip="Type of the column">Type</th><th class="tooltipped" data-position="top" data-tooltip="The different values of columns of type enum/set are to be specified as \'a\',\'b\',\'c\'... To use a backslash (\\) or an apostrophe (\') in one of those values, precede it with a backslash (eg \'\\\\xyz\'or \'a\\\'b\')">Length/Value</th><th class="tooltipped" data-position="top" data-tooltip="For default values, please enter a single value, without escape character or apostrophes, such as: a">Default</th><th class="tooltipped" data-position="top" data-tooltip="Character set and value encoding">Collation</th><th class="tooltipped" data-position="top" data-tooltip="">Attributes</th><th class="tooltipped" data-position="top" data-tooltip="Can be null or not">Null</th><th class="tooltipped" data-position="top" data-tooltip="">Index</th><th class="tooltipped" data-position="top" data-tooltip="Auto Increment">A_I</th><th class="tooltipped" data-position="top" data-tooltip="Add a comment">Comment</th><th class="tooltipped" data-position="top" data-tooltip="">Type MIME</th><th class="tooltipped" data-position="top" data-tooltip="">Transformation</th><th class="tooltipped" data-position="top" data-tooltip="">Transformation Options</th></tr></thead><tbody>';
+                        addTable = addTable + '<tr><td></td><td></td></tr></tbody></table>';
+                        $("#theBody").html(addTable);
+                        $('.tooltipped').tooltip({delay: 50});
                     });
                     $('strong').click(function () {
                         dbName = $(this).attr('id');
