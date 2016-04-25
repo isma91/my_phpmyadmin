@@ -9,7 +9,7 @@
 * @category Controller
 * @package  Controller
 * @author   isma91 <ismaydogmus@gmail.com>
-* @author   Raph <rbleuzet@gmail.com>
+* @author   Raph <rbleuzet@epitech.eu>
 * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
 * @link     https://github.com/isma91/my_phpmyadmin/blob/master/api/index.php
 */
